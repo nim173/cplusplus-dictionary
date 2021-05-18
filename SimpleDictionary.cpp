@@ -1,8 +1,10 @@
 #include <fstream>
 #include <sstream>
 #include <set>
+#include <algorithm>
 #include "SimpleDictionary.h"
 #include "Word.h"
+#include "Types.h"
 
 SimpleDictionary::~SimpleDictionary() {
     // Get an iterator pointing to begining of the hashmap of words
@@ -81,7 +83,7 @@ std::set<string> SimpleDictionary::findWordsWithThreeOrMoreOccurencesOf(char c){
     return ret;
 }
 
-std::set<string> SimpleDictionary::findWordEndingWith(long unsigned int minLength, string str){
+std::set<string> SimpleDictionary::findWordsEndingWith(long unsigned int minLength, string str){
     // a set is chosen here so that the words will be sorted
     std::set<string> ret;
     // Get an iterator pointing to begining of the hashmap of words
@@ -99,3 +101,73 @@ std::set<string> SimpleDictionary::findWordEndingWith(long unsigned int minLengt
     }
     return ret;
 }
+
+std::set<string> SimpleDictionary::findWordsBothNounAndVerb() {
+    // a set is chosen here so that the words will be sorted
+    std::set<string> ret;
+    // Get an iterator pointing to begining of the hashmap of words
+    std::unordered_map<string, Word*>::iterator it = this->words.begin();
+    // Iterate over the map using iterator
+    while(it != this->words.end()) {
+        if(it->second->getType() == NOUN_AND_VERB) {
+            ret.insert(it->first);
+        }
+        ++it;
+    }
+    return ret;
+}
+
+std::set<string> SimpleDictionary::findWordsStartingAndEndingWithSameTwoLetters() {
+    // a set is chosen here so that the words will be sorted
+    std::set<string> ret;
+    // Get an iterator pointing to begining of the hashmap of words
+    std::unordered_map<string, Word*>::iterator it = this->words.begin();
+    // the length of the equal letters we are checking for
+    int len = 2;
+    // Iterate over the map using iterator
+    while(it != this->words.end()) {
+        string str = it->first;
+        int strLength = str.length();
+        if(strLength >= len*2 && str.substr(0, len).compare(str.substr(strLength-len, len)) == 0) {
+            ret.insert(it->first);
+        }
+        ++it;
+    }
+    return ret;
+}
+
+std::set<string> SimpleDictionary::findAnagrams(string originalWord) {
+    string sortedWord = originalWord;
+    // sort the given word for comparison
+    std::sort(sortedWord.begin(), sortedWord.end());
+    // a set is chosen here so that the words will be sorted
+    std::set<string> ret;
+    // Get an iterator pointing to begining of the hashmap of words
+    std::unordered_map<string, Word*>::iterator it = this->words.begin();
+    // Iterate over the map using iterator
+    string str = "";
+    while(it != this->words.end()) {
+        str = it->first;
+        if(str.length() == sortedWord.length() && originalWord.compare(str) != 0) {
+            std::sort(str.begin(), str.end());
+            if (sortedWord.compare(str) == 0) {
+                ret.insert(it->first);
+            }
+        }
+        ++it;
+    }
+    return ret;
+}
+
+Word* SimpleDictionary::getRandomWord() {
+    // Get an iterator pointing to begining of the hashmap of words
+    std::unordered_map<string, Word*>::iterator it = this->words.begin();
+    // initialize random seed
+    srand (time(NULL));
+    // Get a random number between 0 and the length of the map
+    int randomNumber = rand() % this->words.size();
+    // advance iterator to index of generated random number
+    std::advance(it, randomNumber);
+    return it->second;
+}
+

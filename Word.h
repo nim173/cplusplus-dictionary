@@ -17,6 +17,7 @@ public:
     Word(string word, string type, string defintion);
     string getWord();
     string getType();
+    string getFormattedType();
     string getDefinition();
     void setDefinition(string defintion);
     void printDefinition();

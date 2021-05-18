@@ -25,7 +25,19 @@ public:
     std::set<string> findWordsWithThreeOrMoreOccurencesOf(char c);
 
     // finds the words ending with the given string (eg - "ion") with the given minimum length (eg - 6) -  task 3
-    std::set<string> findWordEndingWith(long unsigned int minLength, string str);
+    std::set<string> findWordsEndingWith(long unsigned int minLength, string str);
+
+    // PART 2
+    // find words that are both a noun and a verb (n_and_v)
+    std::set<string> findWordsBothNounAndVerb();
+
+    // find words that start and end with the same two letters (eg. “Photograph”)
+    std::set<string> findWordsStartingAndEndingWithSameTwoLetters();
+
+    // display all words that are anagrams of the given (non-null) word
+    std::set<string> findAnagrams(string word);
+
+    Word* getRandomWord();
 };
 
 #endif

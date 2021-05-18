@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Word.h"
+#include "Types.h"
 
 Word::Word() {
     
@@ -16,22 +17,26 @@ string Word::getWord() {
 }
 
 string Word::getType() {
+    return this->type;
+}
+
+string Word::getFormattedType() {
     string type;
-    if (this->type == "n") {
+    if (this->type == NOUN) {
         type = "Noun (n.)";
-    } else if (this->type == "v") {
+    } else if (this->type == VERB) {
         type = "Verb (v.)";
-    } else if (this->type == "adv") {
+    } else if (this->type == ADVERB) {
         type = "Adverb (adv.)";
-    } else if (this->type == "adj") {
+    } else if (this->type == ADJECTIVE) {
         type = "Adjective (adj.)";
-    } else if (this->type == "prep") {
+    } else if (this->type == PREPOSITION) {
         type = "Preposition (prep.)";
-    } else if (this->type == "misc") {
+    } else if (this->type == MISC_WORDS) {
         type = "MiscWords (misc.)";
-    } else if (this->type == "pn") {
+    } else if (this->type == PROPER_NOUNS) {
         type = "ProperNouns (pn.)";
-    } else if (this->type == "n.v.") {
+    } else if (this->type == NOUN_AND_VERB) {
         type = "NounAndVerb (n.v.)";
     } else {
         type = "Unknown type";
@@ -44,7 +49,7 @@ string Word::getDefinition() {
 }
 
 void Word::printDefinition() {
-    std::cout << getType() << std::endl
+    std::cout << getFormattedType() << std::endl
               << getDefinition() << std::endl;
 }
 
