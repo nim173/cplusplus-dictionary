@@ -12,6 +12,7 @@
 #define INPUT_SIX "6"
 #define INPUT_SEVEN "7"
 #define INPUT_EIGHT "8"
+#define INPUT_NINE "9"
 #define DICTIONARY_FILE_NAME "dictionary2021.txt"
 #define NOUN "n"
 #define VERB "v"
@@ -22,5 +23,7 @@
 #define PROPER_NOUNS "pn"
 #define NOUN_AND_VERB "n_and_v"
 #define NO_OF_TRIES_GUESSING_GAME 3
+#define NUM_ENGLISH_SOUNDING_WORDS 10
+#define ENGLISH_SOUNDING_WORD_LENGTH_CAP 4
 
 #endif

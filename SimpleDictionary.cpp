@@ -60,6 +60,10 @@ Word* SimpleDictionary::findWord(string word){
     return this->words.at(word);
 }
 
+bool SimpleDictionary::checkIfWordExists(string word) {
+    return (this->words.find(word) != this->words.end());
+}
+
 std::set<string> SimpleDictionary::findWordsWithThreeOrMoreOccurencesOf(char c){
     // a set is chosen here so that the words will be sorted
     std::set<string> ret;

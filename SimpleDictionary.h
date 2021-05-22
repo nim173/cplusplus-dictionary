@@ -21,6 +21,8 @@ public:
     // find the given word - task 1
     Word* findWord(string word);
 
+    bool checkIfWordExists(string word);
+
     // finds the words with three or more occurences of the given character (eg- z) - task 2
     std::set<string> findWordsWithThreeOrMoreOccurencesOf(char c);
 
